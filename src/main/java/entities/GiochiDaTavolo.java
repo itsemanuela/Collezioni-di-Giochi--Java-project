@@ -32,11 +32,20 @@ this.listaGiocoTavola = listaGiocoTavola;
         this.mediaMinutiGioco = mediaMinutiGioco;
     }
 
+    public  ListaGiocoTavola getListaGiocoTavola() {
+        return listaGiocoTavola;
+    }
+    public void setListaGiocoTavola(ListaGiocoTavola listaGiocoTavola) {
+        this.listaGiocoTavola = listaGiocoTavola;
+    }
+
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("GiochiDaTavolo{");
         sb.append("numeroGiocatori=").append(numeroGiocatori);
         sb.append(", mediaMinutiGioco=").append(mediaMinutiGioco);
+        sb.append(", listaGiocoTavola=").append(listaGiocoTavola);
         sb.append('}');
         return sb.toString();
     }

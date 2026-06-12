@@ -5,5 +5,6 @@ public enum ListaGiocoTavola {
     AVVENTURA,
     COOPERATIVO,
     STRATEGIA,
-    PARTYGAMES
+    PARTYGAMES,
+    CARTE,
 }
