@@ -95,6 +95,7 @@ public class Main {
             System.out.println("PREMI 6 -> Per FILTRARE i giochi in base al numero di giocatori");
             System.out.println("PREMI 7 -> Per VISUALIZZARE le statistiche di gioco!");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
+            System.out.println("DIGITA'8' -> Per fare l'Update di un gioco");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
 
@@ -278,6 +279,20 @@ public class Main {
 statistiche.giocoPiuCostoso(collezione.getCatalogo());
                 }
 
+                case "8": {
+                    System.out.print("Inserisci l'ID del gioco da aggiornare: ");
+                    String id = scanner.nextLine();
+
+                    System.out.print("Inserisci il nuovo titolo: ");
+                    String nuovoTitolo = scanner.nextLine();
+
+                    System.out.print("Inserisci il nuovo prezzo: ");
+                    // uso Double.parseDouble per leggere il numero correttamente
+                    double nuovoPrezzo = Double.parseDouble(scanner.nextLine());
+                    collezione.aggiornaElemento(id, nuovoTitolo, nuovoPrezzo);
+
+                    break;
+                }
 
                 case "esci": {
                     System.out.println("Grazie per aver usato il catalogo. Arrivederci!");

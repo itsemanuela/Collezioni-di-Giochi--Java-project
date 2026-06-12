@@ -124,9 +124,25 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
 
 
     }
-//mi creo infine il metodo per leggere il catalogo dei giochi in quanto mi serve nelle statistiche
+
+    //mi creo il metodo per leggere il catalogo dei giochi in quanto mi serve nelle statistiche
 public List<Gioco> getCatalogo() {
     return this.catalogoCompleto;
 }
+
+//agg il metodo per aggiornare un elemento della lista
+    public void aggiornaElemento(String id, String nuovoTitolo, double nuovoPrezzo) {
+        this.catalogoCompleto.stream()
+                .filter(gioco -> gioco.getIdGioco().toLowerCase().equals(id.toLowerCase().trim()))
+                .findFirst()
+                .ifPresentOrElse(
+                        gioco -> {
+                            gioco.setTitolo(nuovoTitolo);
+                            gioco.setPrezzo(nuovoPrezzo);
+                            System.out.println("Gioco con ID " + id + " aggiornato!");
+                        },
+                        () -> System.out.println("Errore: ID " + id + " non trovato.")
+                );
+    }
 
 }
