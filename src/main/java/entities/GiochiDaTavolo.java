@@ -4,13 +4,14 @@ public class GiochiDaTavolo extends Gioco{
 
     private int numeroGiocatori;
     private int mediaMinutiGioco;
+    private ListaGiocoTavola listaGiocoTavola;
 
-    public GiochiDaTavolo(String idGioco, String titolo, int annoDiPubblicazione, double prezzo, int numeroGiocatori, int mediaMinutiGioco) {
+    public GiochiDaTavolo(String idGioco, String titolo, int annoDiPubblicazione, double prezzo, int numeroGiocatori, int mediaMinutiGioco,  ListaGiocoTavola listaGiocoTavola) {
         super(idGioco, titolo, annoDiPubblicazione, prezzo);
 
         this.numeroGiocatori = numeroGiocatori;
         this.mediaMinutiGioco = mediaMinutiGioco;
-
+this.listaGiocoTavola = listaGiocoTavola;
 
     }
 

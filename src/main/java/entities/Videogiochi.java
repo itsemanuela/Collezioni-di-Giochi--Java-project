@@ -5,9 +5,9 @@ package entities;
 public class Videogiochi extends Gioco{
     private String piattaforma;
     private int durataInOre;
-    private  ListaGeneri generi;
+    private ListaGeneriVideogiochi generi;
 
-    public Videogiochi(String idGioco, String titolo, int annoDiPubblicazione, double prezzo, String piattaforma, int durataInOre, ListaGeneri generi) {
+    public Videogiochi(String idGioco, String titolo, int annoDiPubblicazione, double prezzo, String piattaforma, int durataInOre, ListaGeneriVideogiochi generi) {
         super(idGioco, titolo, annoDiPubblicazione, prezzo);
 
         //qui inserisco anche gli attributi propri di Videogioco
@@ -31,10 +31,10 @@ public class Videogiochi extends Gioco{
     public void setDurataInOre(int durataInOre) {
         this.durataInOre = durataInOre;
     }
-    public ListaGeneri getGeneri() {
+    public ListaGeneriVideogiochi getGeneri() {
         return generi;
     }
-public void setGeneri(ListaGeneri generi) {
+public void setGeneri(ListaGeneriVideogiochi generi) {
         this.generi = generi;
 }
 
