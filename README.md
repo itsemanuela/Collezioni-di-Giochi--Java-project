@@ -8,7 +8,7 @@ La classe collezione implementerà i metodi operativi e lo scanner per lavorare 
 
 In fase conclusiva di progetto aggiungo che ho predisposto una custom Exception per la gestire la duplicità degli id di gioco, e ho scelto di gestire i vari errori della validazione dell'input dell'utente tramite i costrutti switch, try/catch e if.
 
-Ho usato la logica dell' instanceof per controllare e verificare se i dati richiesti fossero istanze idonee al mio percorso di strutturazione del progetto. 
+Ho usato la logica dell' instanceof per controllare e verificare se i dati richiesti fossero istanze idonee al mio percorso di strutturazione del progetto. L'ho utilizzata evitando di sovraccaricare la gerarchia di classi con interfacce aggiuntive non strettamente necessarie al momento per la "brevità" del progetto L'approccio instanceof unito al casting esplicito mi ha garantito un controllo del tipo  immediato, perfettamente funzionale per la struttura attuale del mio catalogo.
 
 Ho implementato lo Stream per dare il via alla manipolazione degli elementi, ho avuto modo di gestire la sua pipeline attraverso i suoi metodi come l'averagingDouble di cui ho usufruito per calcolare la media, il filter(predicate) per filtrare gli elementi, il map l'ho utilizzato per fare il casting da classi piu generiche a classe piu specifiche; il Collector che è uno dei metodi terminali l'ho utilizzato per trasformare appunto lo stream in una lista vera e propria 
 
