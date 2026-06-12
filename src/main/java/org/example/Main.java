@@ -93,6 +93,7 @@ public class Main {
             System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo VIDEOGIOCO");
             System.out.println("PREMI 5 -> Per AGGIUNGERE un nuovo GIOCO DA TAVOLA");
             System.out.println("PREMI 6 -> Per FILTRARE i giochi in base al numero di giocatori");
+            System.out.println("PREMI 7 -> Per VISUALIZZARE le statistiche di gioco!");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
@@ -271,6 +272,12 @@ public class Main {
                     }
                     break;
                 }
+                case "7": {
+                    Statistiche statistiche = new Statistiche();
+                    statistiche.mostraStatistiche(collezione.getCatalogo());
+statistiche.giocoPiuCostoso(collezione.getCatalogo());
+                }
+
 
                 case "esci": {
                     System.out.println("Grazie per aver usato il catalogo. Arrivederci!");

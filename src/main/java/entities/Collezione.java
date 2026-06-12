@@ -120,7 +120,13 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
 
                 // prelevo e inserisco i risultati in una lista pronta da mostrare
                 .collect(Collectors.toList());
-    }
 
+
+
+    }
+//mi creo infine il metodo per leggere il catalogo dei giochi in quanto mi serve nelle statistiche
+public List<Gioco> getCatalogo() {
+    return this.catalogoCompleto;
+}
 
 }
