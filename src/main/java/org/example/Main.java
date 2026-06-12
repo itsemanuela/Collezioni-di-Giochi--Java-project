@@ -1,6 +1,7 @@
 package org.example;
 
 import entities.*;
+import exception.IdDuplicatoException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 //La classe collezione sarà il mio scaffale vuoto al cui interno inserirò i metodi che voglio applicre
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IdDuplicatoException {
 
         //inizio a popolare il mio "negozio" dei videogiochi
         Collezione collezione = new Collezione();
@@ -81,7 +82,7 @@ public class Main {
             }
         }
 
-        //Inizializzo un dropdown per far scegliere all'utente cosa fare per testare i miei metodi
+//Inizializzo un dropdown per far scegliere all'utente cosa fare per testare i miei metodi
         String sceltaDrop = "";
         while (!sceltaDrop.equals("esci")) {
             System.out.println("==================================================");
@@ -89,6 +90,7 @@ public class Main {
             System.out.println("PREMI 1 -> Per CERCARE un gioco tramite ID");
             System.out.println("PREMI 2 -> Per RIMUOVERE un gioco tramite ID");
             System.out.println("PREMI 3 -> Per FILTRARE i giochi con un prezzo inferiore al tuo budget");
+            System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo VIDEOGIOCO");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
@@ -112,11 +114,14 @@ public class Main {
                 }
 
                 case "3": {
-                    try {
-                        System.out.print("Inserisci il prezzo limite per la ricerca: ");
-                        double budget = scanner.nextDouble();
-                        scanner.nextLine();
+                    System.out.print("Inserisci il prezzo limite per la ricerca: ");
+                    String inputBudget = scanner.nextLine().trim();
 
+                    //  convertio la stringa in un numero double
+                    try {
+                        double budget = Double.parseDouble(inputBudget);
+
+                        // avvio lo stream per filtrare gli elementi e li raggruppo in una nuova lista da ritornare
                         List<Gioco> giochiTrovati = collezione.CercaPerPrezzoMassimo(budget);
 
                         if (!giochiTrovati.isEmpty()) {
@@ -128,10 +133,73 @@ public class Main {
                             System.out.println("Nessun gioco trovato con prezzo inferiore a " + budget + "€.");
                         }
 
-                    } catch (java.util.InputMismatchException e) {
-                        // se l'utente scrive una stringa invece di un numero exception
-                        System.out.println("Errore: Devi inserire un numero valido)");
-                        scanner.nextLine();
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Devi inserire un numero valido.");
+                    }
+                    break;
+                }
+
+                case "4": {
+                    collezione.MostraTuttiGliId();
+                    System.out.print("Inserisci l'ID per il nuovo videogioco (es: V11): ");
+                    String nuovoId = scanner.nextLine().trim();
+
+                    // locco subito l'operazione se l'ID esiste
+                    if (collezione.esisteId(nuovoId)) {
+                        System.out.println("Errore: L'ID '" + nuovoId + "' esiste già nel catalogo! Inserimento annullato.");
+                        break; // esco dal case e torno al menu principale
+                    }
+
+                    System.out.println("ID disponibile! Procedi con l'inserimento dei dati:");
+                    System.out.print("Inserisci il Titolo: ");
+                    String titolo = scanner.nextLine();
+
+                    // gestisco problema dei numeri stringhe negli anni
+                    System.out.print("Inserisci l'Anno di pubblicazione: ");
+                    String annoInput = scanner.nextLine().trim();
+                    int anno;
+                    try {
+                        anno = Integer.parseInt(annoInput);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Anno non valido. Operazione annullata.");
+                        break;
+                    }
+
+                    // stesso caso precedente
+                    System.out.print("Inserisci il Prezzo (es: 39.90): ");
+                    String prezzoInput = scanner.nextLine().trim();
+                    double prezzo;
+                    try {
+                        prezzo = Double.parseDouble(prezzoInput);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Prezzo non valido. Operazione annullata.");
+                        break;
+                    }
+
+                    System.out.print("Inserisci la Piattaforma (es: PC, PS5): ");
+                    String piattaforma = scanner.nextLine();
+
+                    System.out.print("Inserisci le Copie in magazzino: ");
+                    String copieInput = scanner.nextLine().trim();
+                    int copie;
+                    //mi lancio nell'eccezione se scrivo stringhe e non numeri
+                    try {
+                        copie = Integer.parseInt(copieInput);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Numero copie non valido. Operazione annullata.");
+                        break;
+                    }
+
+                    // dopo aver valutato tutte le mie condizioni procedo a provare ad aggiungere il videogioco al cataalogo
+                    try {
+
+                        Videogiochi nuovoVG = new Videogiochi(nuovoId, titolo, anno, prezzo, piattaforma, copie, ListaGeneriVideogiochi.AVVENTURA);
+
+                        collezione.aggiungiGioco(nuovoVG);
+
+                    } catch (exception.IdDuplicatoException e) {
+                        // questo catch è una sicurezza extra, dato che ho gia controllato l'ID all'inizio
+                        System.out.println("OPERAZIONE ANNULLATA -> " + e.getMessage());
                     }
                     break;
                 }
@@ -150,4 +218,3 @@ public class Main {
         scanner.close();
     }
 }
-

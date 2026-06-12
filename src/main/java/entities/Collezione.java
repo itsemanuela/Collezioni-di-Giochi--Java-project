@@ -3,6 +3,8 @@ import entities.Gioco;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import exception.IdDuplicatoException;
+
 
 public class Collezione {
     //questo è lo scheletro del negozio che popolo nel main
@@ -82,8 +84,24 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
     }
 
 
+// ora scrvio prima un metodo per controllare l'univocità dell'id e gestire eventuale duplciato e poi metodo per aggiungerlo al catalogo
 
 
+    public boolean esisteId(String idDaControllare) {
+        String idMinuscolo = idDaControllare.toLowerCase().trim();
+        return this.catalogoCompleto.stream()
+                .anyMatch(gioco -> gioco.getIdGioco().toLowerCase().equals(idMinuscolo));
+    }
+    //utilizzo anyMatch per verificare se è presente nel catalogo almeno un gioco con quell'id selezionato, altrimenti avrei dovuto gestire il probelma della duplicità con il set, ma avrei dovuto a quel punto gestire anche l'override del metodo equals andando a stravolgere un po' tutta la struttuca dell'abstract Gioco.
 
+    public void aggiungiGioco(Gioco nuovoGioco) throws IdDuplicatoException {
+        if (this.esisteId(nuovoGioco.getIdGioco())) {
+            // Se l'ID è occupato mi lancio nella mia custom checked exception
+            throw new IdDuplicatoException("L'ID '" + nuovoGioco.getIdGioco() + "' è già presente nel catalogo!");
+        }
+
+        this.catalogoCompleto.add(nuovoGioco);
+        System.out.println("Gioco inserito con successo nel catalogo!");
+    }
 
 }
