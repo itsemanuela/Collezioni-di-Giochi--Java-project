@@ -54,6 +54,23 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
                 .forEach(gioco -> System.out.println(" Gioco trovato tramite id:" + " " + gioco));
     }
 
+    //METODO RIMUOVI PER ID
+    public void RimuoviPerId(String idDaRimuovere) {
+        String idRimuoviMinuscolo = idDaRimuovere.toLowerCase().trim();
+
+        //mi prendo il gioco perchè quando elimino voglio che escano tutti i suoi dettagli e non solo l'id rimosso
+        this.catalogoCompleto.stream()
+                .filter(gioco -> gioco.getIdGioco().toLowerCase().equals(idRimuoviMinuscolo))
+                .forEach(gioco -> System.out.println("HO RIMOSSO QUESTO GIOCO: " + gioco));
+        //workflow: prelevo il catalogo completo, prendo l'id dal gioco e lo rimuovo con removeIf (trasformo tt in minuscolo", qs mi restituisce un booleano.
+
+        boolean rimosso = this.catalogoCompleto.removeIf(gioco -> gioco.getIdGioco().toLowerCase().equals(idRimuoviMinuscolo));
+        if (rimosso) {
+            System.out.println("Gioco rimosso con successo dal catalogo!");
+        } else {
+            System.out.println("Errore: Nessun gioco trovato con l'ID '" + idDaRimuovere + "'. Impossibile rimuovere.");
+        }
+    }
 
 
 
