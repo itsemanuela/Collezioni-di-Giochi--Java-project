@@ -42,11 +42,11 @@ this.listaGiocoTavola = listaGiocoTavola;
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("GiochiDaTavolo{");
-        sb.append("numeroGiocatori=").append(numeroGiocatori);
-        sb.append(", mediaMinutiGioco=").append(mediaMinutiGioco);
-        sb.append(", listaGiocoTavola=").append(listaGiocoTavola);
-        sb.append('}');
-        return sb.toString();
+        return "GiocoDaTavolo {" +
+                super.toString() +
+                ", Giocatori=" + numeroGiocatori +
+                ", Durata=" + mediaMinutiGioco+ " min" +
+                ", Tipo=" + listaGiocoTavola +
+                '}';
     }
 }

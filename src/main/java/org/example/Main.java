@@ -58,11 +58,12 @@ List<GiochiDaTavolo> elencoG= List.of(t1, t2, t3, t4, t5, t6, t7, t8,t9, t10 );
     //ora creo la variabile stringa vuota per inizializza la scelta dell'utente
     String sceltaUtente= " ";
     Scanner scanner = new Scanner(System.in);
+    System.out.println("--------------BENVENUTO/A NELLA COLLEZIONE DI GIOCHI PIU' VIRALI DEL WEB----------------------");
+    System.out.println("------------------PREMI 1 PER ESPLORARE I VIDEOGIOCHI, 2 PER I GIOCHI DA TAVOLE, Q PER USCIRE");
+    System.out.println("SCEGLI");
     while (!sceltaUtente.equals("Q")) {
 
-        System.out.println("--------------BENVENUTO/A NELLA COLLEZIONE DI GIOCHI PIU' VIRALI DEL WEB----------------------");
-        System.out.println("------------------PREMI 1 PER ESPLORARE I VIDEOGIOCHI, 2 PER I GIOCHI DA TAVOLE, Q PER USCIRE");
-        System.out.println("SCEGLI");
+
         sceltaUtente = scanner.nextLine();
         switch(sceltaUtente) {
             case "1":{
@@ -70,7 +71,18 @@ List<GiochiDaTavolo> elencoG= List.of(t1, t2, t3, t4, t5, t6, t7, t8,t9, t10 );
                         collezione.StampoVideogiochi();
                 break;
             }
+            case "2":
+                System.out.println("Hai selezionato i GIOCHI DA TAVOLO");
+                collezione.StampoTavolo();
+                break;
+            case "q":
+                System.out.println("A presto!");
+                break;
+            default:
+                System.out.println("Opzione non valida, scegli 1-2 o Q");
+
         }
+
     }
 
 

@@ -40,15 +40,12 @@ public void setGeneri(ListaGeneriVideogiochi generi) {
 
     @Override
     public String toString() {
-        return "Videogioco [" +
-                "ID='" + getIdGioco() + '\'' +
-                ", Titolo='" + getTitolo() + '\'' +
-                ", Anno=" + getAnnoDiPubblicazione() +
-                ", Prezzo=" + getPrezzo() + "€" +
+        return "Videogioco {" +
+                super.toString() + // 👈 Recupera ID, Titolo, Anno e Prezzo dal padre!
                 ", Piattaforma='" + piattaforma + '\'' +
                 ", Durata=" + durataInOre + " ore" +
                 ", Genere=" + generi +
-                ']';
+                '}';
     } //ho dovuto personalizzare l'override.
 
 }
