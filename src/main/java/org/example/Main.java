@@ -1,10 +1,6 @@
 package org.example;
 
-import entities.Videogiochi;
-import entities.GiochiDaTavolo;
-import entities.ListaGiocoTavola;
-import entities.ListaGeneriVideogiochi;
-import entities.Collezione;
+import entities.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +16,7 @@ public class Main {
 
         Videogiochi v1 = new Videogiochi("V01", "The Sims 4", 2014, 39.99, "PC", 500, ListaGeneriVideogiochi.STRATEGIA);
         Videogiochi v2 = new Videogiochi("V02", "Harry Potter e la Pietra Filosofale", 2001, 14.99, "PS1", 15, ListaGeneriVideogiochi.AVVENTURA);
-        Videogiochi v3 = new Videogiochi("V03", "FarmVille Tales", 2010, 0.00, "PC", 300, ListaGeneriVideogiochi.STRATEGIA);
+        Videogiochi v3 = new Videogiochi("V03", "FarmVille Tales", 2010, 10.00, "PC", 300, ListaGeneriVideogiochi.STRATEGIA);
         Videogiochi v4 = new Videogiochi("V04", "Animal Crossing: New Horizons", 2020, 59.99, "Nintendo Switch", 400, ListaGeneriVideogiochi.AVVENTURA);
         Videogiochi v5 = new Videogiochi("V05", "Giulia Passione Cucina", 2008, 19.99, "Nintendo DS", 20, ListaGeneriVideogiochi.STRATEGIA);
         Videogiochi v6 = new Videogiochi("V06", "Hogwarts Legacy", 2023, 69.99, "PS5", 70, ListaGeneriVideogiochi.AVVENTURA);
@@ -92,6 +88,7 @@ public class Main {
             System.out.println("Benvenuto nel dropdown avanzato del catalogo Gioco");
             System.out.println("PREMI 1 -> Per CERCARE un gioco tramite ID");
             System.out.println("PREMI 2 -> Per RIMUOVERE un gioco tramite ID");
+            System.out.println("PREMI 3 -> Per FILTRARE i giochi con un prezzo inferiore al tuo budget");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
@@ -113,6 +110,32 @@ public class Main {
                     collezione.RimuoviPerId(idRimuovi);
                     break;
                 }
+
+                case "3": {
+                    try {
+                        System.out.print("Inserisci il prezzo limite per la ricerca: ");
+                        double budget = scanner.nextDouble();
+                        scanner.nextLine();
+
+                        List<Gioco> giochiTrovati = collezione.CercaPerPrezzoMassimo(budget);
+
+                        if (!giochiTrovati.isEmpty()) {
+                            System.out.println("Ecco i giochi trovati con prezzo inferiore a " + budget + "€:");
+                            for (Gioco gioco : giochiTrovati) {
+                                System.out.println("- " + gioco.getTitolo() + " | Prezzo: " + gioco.getPrezzo() + "€");
+                            }
+                        } else {
+                            System.out.println("Nessun gioco trovato con prezzo inferiore a " + budget + "€.");
+                        }
+
+                    } catch (java.util.InputMismatchException e) {
+                        // se l'utente scrive una stringa invece di un numero exception
+                        System.out.println("Errore: Devi inserire un numero valido)");
+                        scanner.nextLine();
+                    }
+                    break;
+                }
+
                 case "esci": {
                     System.out.println("Grazie per aver usato il catalogo. Arrivederci!");
                     break;

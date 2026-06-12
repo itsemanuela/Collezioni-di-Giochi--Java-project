@@ -1,7 +1,8 @@
 package entities;
-
+import entities.Gioco;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Collezione {
     //questo è lo scheletro del negozio che popolo nel main
@@ -72,7 +73,13 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
         }
     }
 
-
+    // devo filtrare e tornare una lista con prezzo inferiore a qeullo inserito
+    public List<Gioco> CercaPerPrezzoMassimo(double prezzoLimite) {
+        // avvio lo stream per filtrare gli elementi e li raggruppo in una nuova lista da ritornare
+        return this.catalogoCompleto.stream()
+                .filter(gioco -> gioco.getPrezzo() < prezzoLimite)
+                .collect(Collectors.toList());
+    }
 
 
 
