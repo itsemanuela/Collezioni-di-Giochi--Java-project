@@ -59,9 +59,9 @@ List<GiochiDaTavolo> elencoG= List.of(t1, t2, t3, t4, t5, t6, t7, t8,t9, t10 );
     String sceltaUtente= " ";
     Scanner scanner = new Scanner(System.in);
     System.out.println("--------------BENVENUTO/A NELLA COLLEZIONE DI GIOCHI PIU' VIRALI DEL WEB----------------------");
-    System.out.println("------------------PREMI 1 PER ESPLORARE I VIDEOGIOCHI, 2 PER I GIOCHI DA TAVOLE, Q PER USCIRE");
+    System.out.println("------------------PREMI 1 PER ESPLORARE I VIDEOGIOCHI, 2 PER I GIOCHI DA TAVOLE, q PER USCIRE");
     System.out.println("SCEGLI");
-    while (!sceltaUtente.equals("Q")) {
+    while (!sceltaUtente.equals("q")) {
 
 
         sceltaUtente = scanner.nextLine();
@@ -78,6 +78,9 @@ List<GiochiDaTavolo> elencoG= List.of(t1, t2, t3, t4, t5, t6, t7, t8,t9, t10 );
             case "q":
                 System.out.println("A presto!");
                 break;
+            case "Q":
+                System.out.println("A presto!");
+                break;
             default:
                 System.out.println("Opzione non valida, scegli 1-2 o Q");
 
@@ -85,9 +88,41 @@ List<GiochiDaTavolo> elencoG= List.of(t1, t2, t3, t4, t5, t6, t7, t8,t9, t10 );
 
     }
 
+    //Inizializzo un dropdown per far scegliere all'utente cosa fare per testare i miei metodi
 
+    String sceltaDrop =  " ";
+    while (!sceltaDrop.equals("esci")) {
+        System.out.println("==================================================");
+        System.out.println("Benvenuto nel dropdown avanzato del catalogo Gioco");
+        System.out.println("PREMI 1 -> Per CERCARE un gioco tramite ID");
+        System.out.println("PREMI 2 -> Per RIMUOVERE un gioco tramite ID");
+        System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
+        System.out.println("==================================================");
+        System.out.print("SCEGLI OPERAZIONE: ");
 
+        sceltaDrop = scanner.nextLine().trim().toLowerCase(); //per avere il controllo delle minuscole e spazi
 
+        switch(sceltaDrop) {
+            case "1":{
+                collezione.MostraTuttiGliId();
+                System.out.print(" Digita l'ID del gioco che vuoi visualizzare nel dettaglio: ");
+                String idCerca = scanner.nextLine();
+                collezione.CercoPerId(idCerca);
+                break;
+            }
+            case "esci": {
+                System.out.println("Grazie per aver usato il catalogo. Arrivederci!");
+                break;
+            }
+            default: {
+
+                    System.out.println("Opzione non valida, riprova!");
+                }
+                break;
+
+            }
+        }
+    }
 
 }
-}
+
