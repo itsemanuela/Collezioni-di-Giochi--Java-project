@@ -104,4 +104,23 @@ public void CreoListaGioco(List<GiochiDaTavolo> lista){
         System.out.println("Gioco inserito con successo nel catalogo!");
     }
 
+
+    // metodo per ricercare il gioco filtrando il numero di giocatori da inserire
+    public List<GiochiDaTavolo> trovaGiochiPerNumeroGiocatori(int numeroRichiesto) {
+
+            //prendo il catalogo del magazzino e apro lo stream per accedere ai metodi
+        return this.catalogoCompleto.stream()
+                // filtro e scarto tutto ciò che non è un gioco da tavolo
+                .filter(elemento -> elemento instanceof GiochiDaTavolo)
+
+                .map(elemento -> (GiochiDaTavolo) elemento)
+
+                // filtro e prendo solo i giochi che hanno lo stesso numero di giocatori richiesto
+                .filter(giocoTavolo -> giocoTavolo.getNumeroGiocatori() == numeroRichiesto)
+
+                // prelevo e inserisco i risultati in una lista pronta da mostrare
+                .collect(Collectors.toList());
+    }
+
+
 }

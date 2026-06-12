@@ -91,7 +91,8 @@ public class Main {
             System.out.println("PREMI 2 -> Per RIMUOVERE un gioco tramite ID");
             System.out.println("PREMI 3 -> Per FILTRARE i giochi con un prezzo inferiore al tuo budget");
             System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo VIDEOGIOCO");
-            System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo GIOCO DA TAVOLA");
+            System.out.println("PREMI 5 -> Per AGGIUNGERE un nuovo GIOCO DA TAVOLA");
+            System.out.println("PREMI 6 -> Per FILTRARE i giochi in base al numero di giocatori");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
@@ -242,6 +243,31 @@ public class Main {
                         System.out.println("Errore: Formato numero non valido. Operazione annullata.");
                     } catch (exception.IdDuplicatoException e) {
                         System.out.println("Errore: " + e.getMessage());
+                    }
+                    break;
+                }
+
+                case "6": {
+                    System.out.print("Inserisci il numero di giocatori per la ricerca: ");
+                    String inputGiocatori = scanner.nextLine().trim();
+
+                    try {
+                        int numeroCercato = Integer.parseInt(inputGiocatori);
+                        //chiamol il metodo della class collezione
+                        List<GiochiDaTavolo> risultati = collezione.trovaGiochiPerNumeroGiocatori(numeroCercato);
+
+                        // controllo se ho trovato qualcosa
+                        if (risultati.isEmpty()) {
+                            System.out.println("Nessun gioco da tavolo trovato per " + numeroCercato + " giocatori.");
+                        } else {
+                            System.out.println("Giochi trovati per " + numeroCercato + " giocatori:");
+                            for (GiochiDaTavolo gioco : risultati) {
+                                System.out.println("- " + gioco.getTitolo());
+                            }
+                        }
+                        //mi lancio nell'exception se non mi vengono dati elementi validi da cercare
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Inserisci un numero valido!");
                     }
                     break;
                 }
