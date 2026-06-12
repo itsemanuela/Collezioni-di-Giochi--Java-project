@@ -91,6 +91,7 @@ public class Main {
             System.out.println("PREMI 2 -> Per RIMUOVERE un gioco tramite ID");
             System.out.println("PREMI 3 -> Per FILTRARE i giochi con un prezzo inferiore al tuo budget");
             System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo VIDEOGIOCO");
+            System.out.println("PREMI 4 -> Per AGGIUNGERE un nuovo GIOCO DA TAVOLA");
             System.out.println("Scrivi 'ESCI' -> Per chiudere il programma");
             System.out.println("==================================================");
             System.out.print("SCEGLI OPERAZIONE: ");
@@ -144,7 +145,7 @@ public class Main {
                     System.out.print("Inserisci l'ID per il nuovo videogioco (es: V11): ");
                     String nuovoId = scanner.nextLine().trim();
 
-                    // locco subito l'operazione se l'ID esiste
+                    // blocco subito l'operazione se l'ID esiste
                     if (collezione.esisteId(nuovoId)) {
                         System.out.println("Errore: L'ID '" + nuovoId + "' esiste già nel catalogo! Inserimento annullato.");
                         break; // esco dal case e torno al menu principale
@@ -200,6 +201,47 @@ public class Main {
                     } catch (exception.IdDuplicatoException e) {
                         // questo catch è una sicurezza extra, dato che ho gia controllato l'ID all'inizio
                         System.out.println("OPERAZIONE ANNULLATA -> " + e.getMessage());
+                    }
+                    break;
+                }
+
+                case "5": {
+                    collezione.MostraTuttiGliId();
+                    System.out.print("Inserisci l'ID per il nuovo gioco da tavolo: ");
+                    String nuovoId = scanner.nextLine().trim();
+
+                    // controllo ID anticipato
+                    if (collezione.esisteId(nuovoId)) {
+                        System.out.println("Errore: L'ID '" + nuovoId + "' esiste già. Operazione annullata.");
+                        break;
+                    }
+
+                    System.out.print("Inserisci il Titolo: ");
+                    String titolo = scanner.nextLine();
+
+                    // gestisco errore numeri con try catch
+                    try {
+                        System.out.print("Inserisci Anno: ");
+                        int anno = Integer.parseInt(scanner.nextLine().trim());
+
+                        System.out.print("Inserisci Prezzo: ");
+                        double prezzo = Double.parseDouble(scanner.nextLine().trim());
+
+                        System.out.print("Inserisci numero giocatori: ");
+                        int numeroGiocatori = Integer.parseInt(scanner.nextLine().trim());
+
+                        System.out.print("Inserisci durata media in minuti: ");
+                        int mediaMinuti = Integer.parseInt(scanner.nextLine().trim());
+
+                        //creo nuovo gioco con stessi parametri richiesti
+                        GiochiDaTavolo nuovoGT = new GiochiDaTavolo(nuovoId, titolo, anno, prezzo, numeroGiocatori, mediaMinuti, ListaGiocoTavola.STRATEGIA);
+
+                        collezione.aggiungiGioco(nuovoGT);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore: Formato numero non valido. Operazione annullata.");
+                    } catch (exception.IdDuplicatoException e) {
+                        System.out.println("Errore: " + e.getMessage());
                     }
                     break;
                 }
